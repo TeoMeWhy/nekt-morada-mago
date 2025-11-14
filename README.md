@@ -7,6 +7,14 @@ A partir do dia 17/11 teremos o noss workshop ao vivo criando a nossa plataforma
 
 Nos encontraremos ao vivo na [Twitch](https://twitch.tv/teomewhy) às 9AM para ensinar ao vivo tudo o que você precisa saber sobre a Nekt e criar sua própria plataforma de dados.
 
+### Setup
+
+> [!WARNING] 
+Não vamos realizar o setup ao vivo! Você já deve chegar com o setup de seu workspace pronto!
+
+- [:link: Use nosso link para criar o seu workspace :link:](https://nekt.com/?via=33hoqj8m)
+- [:link: Aprenda a criar seu Workspace com o Tony (CEO da Nekt) :link:](https://www.youtube.com/watch?v=_c5HpeLfZh8&t=1s)
+
 ## Dados que serão utilizados
 
 No primeiro momento, vamos utilizar os dados abertos que temos no Kaggle:
