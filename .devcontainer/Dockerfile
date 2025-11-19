@@ -17,6 +17,10 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 # Install Jupyter and Nekt SDK
 RUN pip install jupyter git+https://github.com/nektcom/nekt-sdk-py.git#egg=nekt-sdk
 
+
+# Install Pandas and dotenv
+RUN pip install python-dotenv==1.2.1 pandas==2.3.3
+
 # Expose port 8888 for Jupyter Notebook
 EXPOSE 8888
 
