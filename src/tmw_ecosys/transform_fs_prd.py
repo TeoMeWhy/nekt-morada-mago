@@ -14,11 +14,13 @@ def date_range(start, stop, monthly=False):
     return dates
 
 
-def exec_iterable_query(layer, folder, table_name, query, dates):
+def exec_iterable_query(layer, folder, table_name, query, dates_origin):
+
+    dates = dates_origin.copy()
 
     try:
         df_all = nekt.load_table(layer_name=layer, table_name=table_name)
-        df_all.union(spark.sql(query.format(date=dates.pop(0))))
+        df_all = df_all.union(spark.sql(query.format(date=dates.pop(0))))
         
     except Exception:
         df_all = spark.sql(query.format(date=dates.pop(0)))
@@ -36,7 +38,9 @@ def exec_iterable_query(layer, folder, table_name, query, dates):
     )
 
 
-def exec_long_dates(layer, folder, table_name, query, dates, window_size=30):
+def exec_long_dates(layer, folder, table_name, query, dates_origin, window_size=30):
+
+    dates = dates_origin.copy()
 
     while len(dates)> window_size:
         dates_tmp = dates[:window_size]
@@ -78,7 +82,7 @@ def exec_long_dates(layer, folder, table_name, query, dates, window_size=30):
 
 # RANGE DE DATAS
 start = datetime.datetime.now().strftime("%Y-%m-%d")
-# start = "2025-09-01"
+# start = "2025-01-01"
 stop = datetime.datetime.now().strftime("%Y-%m-%d")
 dates = date_range(start, stop, monthly=False)
 
@@ -519,7 +523,7 @@ df_fs_transacional = exec_long_dates(layer="Silver",
                                     folder="tmw_ecosys",
                                     table_name="fs_transacional",
                                     query=query_fs_transacional,
-                                    dates=dates,
+                                    dates_origin=dates.copy(),
                                     window_size=12)
 
 
@@ -527,7 +531,7 @@ df_fs_education = exec_long_dates(layer="Silver",
                                     folder="tmw_ecosys",
                                     table_name="fs_education",
                                     query=query_fs_education,
-                                    dates=dates,
+                                    dates_origin=dates.copy(),
                                     window_size=12)
 
 
@@ -535,6 +539,5 @@ df_fs_life_cycle = exec_long_dates(layer="Silver",
                                     folder="tmw_ecosys",
                                     table_name="fs_life_cycle",
                                     query=query_fs_life_cycle,
-                                    dates=dates,
+                                    dates_origin=dates.copy(),
                                     window_size=12)
-
